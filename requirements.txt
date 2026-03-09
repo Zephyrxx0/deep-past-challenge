@@ -1,0 +1,17 @@
+torch
+torchvision
+torchaudio
+transformers==4.40.0
+sentencepiece
+sacrebleu
+evaluate
+datasets
+pandas
+numpy
+scikit-learn
+tqdm
+jupyter
+ipykernel
+sacremoses
+unicodedata2
+peft
