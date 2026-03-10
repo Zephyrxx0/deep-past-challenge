@@ -52,10 +52,16 @@ Thumbs.db
 # Model files
 models/*/
 !models/.gitkeep
+!models/stage1_final/
+!models/stage2_final/
+!models/stage3_final/
 
 # Data files (if needed)
 data/*/
 !data/.gitkeep
+!data/competition/
+!data/akkademia/*.csv
+!data/oracc_kaggle/
 
 # Output files
 outputs/*/
