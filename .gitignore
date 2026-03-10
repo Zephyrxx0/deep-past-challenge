@@ -63,6 +63,9 @@ data/*/
 !data/akkademia/*.csv
 !data/oracc_kaggle/
 
+# Allow parsed files specifically
+!data/akkademia/*_parsed.csv
+
 # Output files
 outputs/*/
 !outputs/.gitkeep
