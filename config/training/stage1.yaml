@@ -1,0 +1,12 @@
+model_id: facebook/mbart-large-50-many-to-many-mmt
+train_csv: data/stage1_train.csv
+val_csv: data/stage3_val.csv
+epochs: 10
+learning_rate: 1e-4
+batch_size: 4
+gradient_accumulation_steps: 4
+warmup_steps: 500
+max_source_length: 256
+max_target_length: 256
+seed: 42
+output_dir: models/stage1_final
