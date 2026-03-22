@@ -1,0 +1,10 @@
+approved_models:
+  - model_id: facebook/mbart-large-50-many-to-many-mmt
+    family: mBART-50
+    hf_checkpoint: facebook/mbart-large-50-many-to-many-mmt
+  - model_id: google/mt5-base
+    family: mT5
+    hf_checkpoint: google/mt5-base
+  - model_id: facebook/nllb-200-distilled-600M
+    family: NLLB-200
+    hf_checkpoint: facebook/nllb-200-distilled-600M
