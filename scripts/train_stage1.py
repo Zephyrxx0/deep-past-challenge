@@ -14,18 +14,22 @@ Usage:
 
 import argparse
 import json
-import os
-import random
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
-
-import yaml
 
 # Project root for imports
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+
+# Import shared training utilities
+from scripts.training_utils import (
+    load_config,
+    merge_config,
+    validate_config,
+    write_run_manifest,
+    set_seeds,
+)
 
 
 # Default config path
@@ -77,145 +81,6 @@ def parse_args() -> argparse.Namespace:
     )
 
     return parser.parse_args()
-
-
-def load_config(config_path: Path) -> dict:
-    """Load training config from YAML file."""
-    if config_path.exists():
-        with config_path.open("r", encoding="utf-8") as f:
-            return yaml.safe_load(f) or {}
-    return {}
-
-
-def merge_config(base_config: dict, args: argparse.Namespace) -> dict:
-    """Merge base config with CLI overrides."""
-    config = base_config.copy()
-
-    # Apply CLI overrides if provided
-    if args.train_csv is not None:
-        config["train_csv"] = str(args.train_csv)
-    if args.val_csv is not None:
-        config["val_csv"] = str(args.val_csv)
-    if args.model_id is not None:
-        config["model_id"] = args.model_id
-    if args.output_dir is not None:
-        config["output_dir"] = str(args.output_dir)
-    if args.epochs is not None:
-        config["epochs"] = args.epochs
-    if args.batch_size is not None:
-        config["batch_size"] = args.batch_size
-    if args.learning_rate is not None:
-        config["learning_rate"] = args.learning_rate
-    if args.max_source_length is not None:
-        config["max_source_length"] = args.max_source_length
-    if args.max_target_length is not None:
-        config["max_target_length"] = args.max_target_length
-
-    # Always use seed from CLI (has default)
-    config["seed"] = args.seed
-
-    return config
-
-
-def validate_config(config: dict, dry_run: bool = False) -> None:
-    """Validate required config fields and file existence.
-
-    Args:
-        config: Merged configuration dictionary
-        dry_run: If True, validate files exist
-
-    Raises:
-        ValueError: If required config is missing
-        FileNotFoundError: If required files don't exist (in dry_run or train mode)
-    """
-    # Check required fields
-    required_fields = ["output_dir"]
-    missing = [f for f in required_fields if not config.get(f)]
-    if missing:
-        raise ValueError(f"Missing required config fields: {missing}")
-
-    # Validate train_csv exists (required for both dry-run and training)
-    train_csv_path = config.get("train_csv")
-    if train_csv_path:
-        train_csv = Path(train_csv_path)
-        if not train_csv.exists():
-            raise FileNotFoundError(
-                f"train_csv not found: {train_csv}. "
-                "Ensure the path is correct or run data preprocessing first."
-            )
-    elif not dry_run:
-        raise ValueError("train_csv is required for training")
-
-    # Validate val_csv if provided
-    val_csv_path = config.get("val_csv")
-    if val_csv_path:
-        val_csv = Path(val_csv_path)
-        if not val_csv.exists():
-            raise FileNotFoundError(
-                f"val_csv not found: {val_csv}. "
-                "Ensure the path is correct or run data preprocessing first."
-            )
-
-
-def write_run_manifest(config: dict, output_dir: Path) -> Path:
-    """Write run_manifest.json with run metadata.
-
-    Args:
-        config: Merged configuration
-        output_dir: Directory to write manifest to
-
-    Returns:
-        Path to written manifest
-    """
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    manifest = {
-        "stage": 1,
-        "model_id": config.get("model_id", "facebook/mbart-large-50-many-to-many-mmt"),
-        "train_csv": config.get("train_csv"),
-        "val_csv": config.get("val_csv"),
-        "seed": config.get("seed", SEED),
-        "output_dir": str(output_dir),
-        "epochs": config.get("epochs", 10),
-        "batch_size": config.get("batch_size", 4),
-        "learning_rate": float(config.get("learning_rate", 1e-4)),
-        "max_source_length": config.get("max_source_length", 256),
-        "max_target_length": config.get("max_target_length", 256),
-        "started_at_utc": datetime.now(timezone.utc).isoformat(),
-    }
-
-    manifest_path = output_dir / "run_manifest.json"
-    with manifest_path.open("w", encoding="utf-8") as f:
-        json.dump(manifest, f, indent=2)
-
-    return manifest_path
-
-
-def set_seeds(seed: int) -> None:
-    """Set deterministic seeds for reproducibility.
-
-    Per AGENTS.md: Always set seeds for deterministic behavior.
-    """
-    random.seed(seed)
-    os.environ["PYTHONHASHSEED"] = str(seed)
-
-    try:
-        import numpy as np
-
-        np.random.seed(seed)
-    except ImportError:
-        pass
-
-    try:
-        import torch
-
-        torch.manual_seed(seed)
-        if torch.cuda.is_available():
-            torch.cuda.manual_seed_all(seed)
-            torch.backends.cudnn.deterministic = True
-            torch.backends.cudnn.benchmark = False
-    except ImportError:
-        pass
 
 
 def run_training(config: dict, resume_from: Path | None = None) -> None:
@@ -397,8 +262,8 @@ def main() -> int:
         # Get output directory
         output_dir = Path(config["output_dir"])
 
-        # Write run manifest
-        manifest_path = write_run_manifest(config, output_dir)
+        # Write run manifest (stage=1)
+        manifest_path = write_run_manifest(config, output_dir, stage=1)
         print(f"[INFO] Run manifest written: {manifest_path}")
 
         if args.dry_run:
