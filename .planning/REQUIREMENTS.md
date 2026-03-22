@@ -22,7 +22,7 @@
 ### Stage Training
 
 - [x] **TRN1-01**: User can train Stage 1 from prepared general corpus and save resumable checkpoints.
-- [ ] **TRN1-02**: User can evaluate Stage 1 on validation metrics and persist results.
+- [x] **TRN1-02**: User can evaluate Stage 1 on validation metrics and persist results.
 - [ ] **TRN2-01**: User can train Stage 2 from Stage 1 checkpoint with lower learning rate and domain-focused data.
 - [ ] **TRN2-02**: User can report Stage 2 improvement against Stage 1 baseline and detect forgetting on Stage 1 validation samples.
 - [ ] **TRN3-01**: User can train Stage 3 from Stage 2 checkpoint with genre-conditioned inputs and early stopping.
@@ -75,7 +75,7 @@
 | DATA-02 | Phase 3 | Complete |
 | DATA-03 | Phase 3 | Complete |
 | TRN1-01 | Phase 4 | Complete |
-| TRN1-02 | Phase 4 | Pending |
+| TRN1-02 | Phase 4 | Complete |
 | TRN2-01 | Phase 5 | Pending |
 | TRN2-02 | Phase 5 | Pending |
 | TRN3-01 | Phase 6 | Pending |

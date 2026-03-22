@@ -13,7 +13,7 @@ This roadmap converts v1 requirements into executable phases with explicit succe
 | 1 | Model Foundation Setup | Establish model selection, config, and smoke-tested loading path | ARCH-01, ARCH-02, ARCH-03 |
 | 2 | Tokenizer and Text Interface | Ensure tokenization supports Akkadian-specific notation and roundtrip integrity | TOK-01, TOK-02 |
 | 3 | Data Pipeline and Integrity | Build deterministic data loaders and enforce anti-leakage checks | DATA-01, DATA-02, DATA-03 |
-| 4 | Stage 1 Training | Train and validate general Akkadian foundation model | TRN1-01, TRN1-02 |
+| 4 | 2/2 | Complete   | 2026-03-22 |
 | 5 | Stage 2 Domain Adaptation | Adapt model to OARE domain while monitoring forgetting | TRN2-01, TRN2-02 |
 | 6 | Stage 3 Competition Fine-Tuning | Fine-tune for competition domain with genre conditioning and checkpoint selection | TRN3-01, TRN3-02 |
 | 7 | Evaluation and Glossary Quality | Produce full metric suite including genre and proper-name quality | EVAL-01, EVAL-02, GLS-01, GLS-02 |
@@ -87,11 +87,11 @@ Plans:
 
 **Requirements:** TRN1-01, TRN1-02
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 04-01-PLAN.md — Stage 1 training CLI with checkpoints and run manifests (TRN1-01)
-- [ ] 04-02-PLAN.md — Stage 1 evaluation CLI with BLEU/chrF metrics artifacts (TRN1-02)
+- [x] 04-02-PLAN.md — Stage 1 evaluation CLI with BLEU/chrF metrics artifacts (TRN1-02)
 
 **Success criteria:**
 1. Stage 1 training run completes and saves resumable checkpoints.
