@@ -126,6 +126,12 @@ Plans:
 
 **Requirements:** TRN3-01, TRN3-02
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Implement Stage 3 training CLI with genre conditioning and early stopping (TRN3-01)
+- [ ] 06-02-PLAN.md — Implement Stage 3 evaluation and best checkpoint selection/export (TRN3-02)
+
 **Success criteria:**
 1. Stage 3 training consumes genre-conditioned inputs and runs with early stopping.
 2. Best checkpoint is selected by validation BLEU and exported.

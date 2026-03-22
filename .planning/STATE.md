@@ -19,16 +19,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-22)
 
 **Core value:** Deliver reliable Akkadian-to-English translation quality through a reproducible 3-stage training pipeline that avoids leakage and preserves domain adaptation gains.
-**Current focus:** Phase 05 — stage-2-domain-adaptation
+**Current focus:** Phase 06 — stage-3-competition-fine-tuning
 
 ## Current Status
 
 - Initialization complete: yes
 - Roadmap complete: yes
-- Active phase: 5
-- Current plan: 2 of 3
+- Active phase: 6
+- Current plan: Planning phase
 - Last completed plan: 05-02-PLAN.md (Stage 2 evaluation with forgetting detection)
-- Next command: Execute 05-03-PLAN.md
+- Next command: Execute 06-01-PLAN.md
 
 ## Artifacts
 
