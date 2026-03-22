@@ -16,7 +16,7 @@
 - [x] **TOK-01**: User can train or initialize a tokenizer that preserves project special tokens (`<gap>`, genre tags) and normalized transliteration forms.
 - [x] **TOK-02**: User can verify encode/decode roundtrip behavior on representative transliteration examples.
 - [x] **DATA-01**: User can load each stage dataset (`stage1_train`, `stage2_train`, `stage3_train`, `stage3_val`) with deterministic sampling.
-- [ ] **DATA-02**: User can create batched seq2seq inputs with correct padding, masks, and label handling.
+- [x] **DATA-02**: User can create batched seq2seq inputs with correct padding, masks, and label handling.
 - [x] **DATA-03**: User can enforce split/provenance checks that prevent train/validation/test leakage during staged training.
 
 ### Stage Training
@@ -72,7 +72,7 @@
 | TOK-01 | Phase 2 | Complete |
 | TOK-02 | Phase 2 | Complete |
 | DATA-01 | Phase 3 | Complete |
-| DATA-02 | Phase 3 | Pending |
+| DATA-02 | Phase 3 | Complete |
 | DATA-03 | Phase 3 | Complete |
 | TRN1-01 | Phase 4 | Pending |
 | TRN1-02 | Phase 4 | Pending |
