@@ -67,6 +67,13 @@ Plans:
 
 **Requirements:** DATA-01, DATA-02, DATA-03
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Build deterministic data loaders with fixed-seed reproducibility (DATA-01)
+- [ ] 03-02-PLAN.md — Create DataLoader factory with seq2seq batch collation and masking (DATA-02)
+- [ ] 03-03-PLAN.md — Implement split/provenance integrity validation checks (DATA-03)
+
 **Success criteria:**
 1. Data loaders work for all stage CSVs with fixed-seed reproducibility.
 2. Batch tensors include correct attention and label masking for seq2seq training.
