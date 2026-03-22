@@ -1,0 +1,82 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-03-22T18:54:32.194Z",
+  "phase": "03",
+  "phase_name": "data-pipeline-and-integrity",
+  "phase_dir": ".planning/phases/03-data-pipeline-and-integrity",
+  "plan": 2,
+  "task": 1,
+  "total_tasks": 2,
+  "status": "paused",
+  "completed_tasks": [
+    {
+      "id": 1,
+      "name": "03-01: Add DATA-01 deterministic loading contract tests",
+      "status": "done",
+      "commit": "1e613aa"
+    },
+    {
+      "id": 2,
+      "name": "03-01: Implement deterministic stage data loader CLI and library",
+      "status": "done",
+      "commit": "2e066f7"
+    },
+    {
+      "id": 3,
+      "name": "03-03: Add DATA-03 integrity check contract tests",
+      "status": "done",
+      "commit": "3ca76da"
+    },
+    {
+      "id": 4,
+      "name": "03-03: Implement split/provenance integrity validation CLI",
+      "status": "done",
+      "commit": "169937a"
+    }
+  ],
+  "remaining_tasks": [
+    {
+      "id": 5,
+      "name": "03-02: Add DATA-02 batch collation contract tests",
+      "status": "not_started"
+    },
+    {
+      "id": 6,
+      "name": "03-02: Implement DataLoader factory with seq2seq collation",
+      "status": "not_started"
+    }
+  ],
+  "blockers": [],
+  "human_actions_pending": [],
+  "decisions": [
+    {
+      "decision": "Handle stage2 Sentences_Oare column structure (first_word_spelling, translation) separately from stage1/3 (transliteration, translation)",
+      "rationale": "Stage2 CSV lacks transliteration column; loader and integrity checks map first_word_spelling to normalized transliteration",
+      "phase": "03"
+    },
+    {
+      "decision": "Use ASCII markers ([OK]/[ERROR]) for integrity CLI output instead of Unicode",
+      "rationale": "Windows console encoding (cp1252) fails on Unicode checkmarks",
+      "phase": "03"
+    }
+  ],
+  "uncommitted_files": [
+    ".planning/config.json",
+    ".planning/phases/02-tokenizer-and-text-interface/02-01-PLAN.md",
+    ".planning/phases/02-tokenizer-and-text-interface/02-02-PLAN.md",
+    ".planning/phases/02-tokenizer-and-text-interface/02-RESEARCH.md",
+    ".planning/phases/02-tokenizer-and-text-interface/02-VALIDATION.md",
+    ".planning/phases/03-data-pipeline-and-integrity/03-03-SUMMARY.md",
+    ".planning/research/ARCHITECTURE.md",
+    ".planning/research/FEATURES.md",
+    ".planning/research/PITFALLS.md",
+    ".planning/research/STACK.md",
+    ".planning/research/SUMMARY.md",
+    "AGENTS.md",
+    "TRAINING_PLAN.md",
+    "data-preprocess.zip",
+    "dataset.zip"
+  ],
+  "next_action": "Start Plan 03-02 Task 1: create tests/phase3/test_batch_collation.py per plan, then run RED phase tests",
+  "context_notes": "Phase 03 Wave 1 complete (03-01 + 03-03). SUMMARY for 03-01 committed; 03-03 summary written but not committed yet. Stage2 CSV lacks transliteration; loader/integrity logic maps first_word_spelling to transliteration_normalized. Integrity CLI uses ASCII markers for Windows compatibility. Proceed to Wave 2 (03-02) after committing 03-03 SUMMARY and roadmap/requirements updates."
+}
