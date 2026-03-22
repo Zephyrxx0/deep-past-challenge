@@ -17,7 +17,7 @@
 - [x] **TOK-02**: User can verify encode/decode roundtrip behavior on representative transliteration examples.
 - [x] **DATA-01**: User can load each stage dataset (`stage1_train`, `stage2_train`, `stage3_train`, `stage3_val`) with deterministic sampling.
 - [ ] **DATA-02**: User can create batched seq2seq inputs with correct padding, masks, and label handling.
-- [ ] **DATA-03**: User can enforce split/provenance checks that prevent train/validation/test leakage during staged training.
+- [x] **DATA-03**: User can enforce split/provenance checks that prevent train/validation/test leakage during staged training.
 
 ### Stage Training
 
@@ -73,7 +73,7 @@
 | TOK-02 | Phase 2 | Complete |
 | DATA-01 | Phase 3 | Complete |
 | DATA-02 | Phase 3 | Pending |
-| DATA-03 | Phase 3 | Pending |
+| DATA-03 | Phase 3 | Complete |
 | TRN1-01 | Phase 4 | Pending |
 | TRN1-02 | Phase 4 | Pending |
 | TRN2-01 | Phase 5 | Pending |

@@ -72,7 +72,7 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — Build deterministic data loaders with fixed-seed reproducibility (DATA-01)
 - [ ] 03-02-PLAN.md — Create DataLoader factory with seq2seq batch collation and masking (DATA-02)
-- [ ] 03-03-PLAN.md — Implement split/provenance integrity validation checks (DATA-03)
+- [x] 03-03-PLAN.md — Implement split/provenance integrity validation checks (DATA-03)
 
 **Success criteria:**
 1. Data loaders work for all stage CSVs with fixed-seed reproducibility.
