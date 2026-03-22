@@ -1,5 +1,5 @@
-dataset/
-datasets/
+# dataset/
+# datasets/
 
 # Python
 __pycache__/
@@ -57,8 +57,8 @@ models/*/
 !models/stage2_final/
 !models/stage3_final/
 
-# Data folders (never commit)
-data/
+# Data folders (now tracked with Git LFS)
+# data/
 
 # Output files
 outputs/*/
