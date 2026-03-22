@@ -90,7 +90,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Stage 1 training CLI with checkpoints and run manifests (TRN1-01)
+- [x] 04-01-PLAN.md — Stage 1 training CLI with checkpoints and run manifests (TRN1-01)
 - [ ] 04-02-PLAN.md — Stage 1 evaluation CLI with BLEU/chrF metrics artifacts (TRN1-02)
 
 **Success criteria:**
@@ -173,4 +173,4 @@ Plans:
 - Coverage status: PASS
 
 ---
-*Last updated: 2026-03-22 after Phase 2 planning*
+*Last updated: 2026-03-22 after Phase 04 Plan 01 completion*
