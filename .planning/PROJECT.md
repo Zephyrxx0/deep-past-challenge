@@ -19,10 +19,12 @@ Deliver reliable Akkadian-to-English translation quality through a reproducible 
 - ✓ Config-driven base model selection with approved checkpoints (ARCH-01, validated in Phase 1)
 - ✓ Model/tokenizer smoke command with one-step generation path (ARCH-02, validated in Phase 1)
 - ✓ Versioned stage-specific training configs and loader CLI (ARCH-03, validated in Phase 1)
+- ✓ Tokenizer training/resolver interface preserves `<gap>` and genre tags via manifest contract (TOK-01, validated in Phase 2)
+- ✓ Deterministic tokenizer roundtrip verification command for representative transliterations (TOK-02, validated in Phase 2)
 
 ### Active
 
-- [ ] Implement tokenizer, data pipeline, and training infrastructure for staged fine-tuning
+- [ ] Implement data pipeline and training infrastructure for staged fine-tuning
 - [ ] Train and evaluate Stage 1, Stage 2, and Stage 3 models with reproducible metrics
 - [ ] Integrate glossary-aware decoding/post-processing for proper name accuracy
 - [ ] Generate competition-ready test predictions and submission artifacts
@@ -43,7 +45,7 @@ Deliver reliable Akkadian-to-English translation quality through a reproducible 
 - Candidate model families researched: mBART-50, mT5-base, NLLB-200-distilled
 - Research direction selected: architecture-focused research for low-resource historical NMT
 - Training strategy: curriculum fine-tuning with learning-rate decay (1e-4 -> 5e-5 -> 1e-5)
-- Current state: Phase 1 complete — model selection baseline, smoke-load path, and versioned stage configs are now implemented and test-covered.
+- Current state: Phase 2 complete — tokenizer training/resolution and roundtrip integrity gates are now implemented and test-covered.
 
 ## Constraints
 
@@ -80,4 +82,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 after Phase 1 completion*
+*Last updated: 2026-03-22 after Phase 2 completion*
