@@ -24,7 +24,7 @@
 - [x] **TRN1-01**: User can train Stage 1 from prepared general corpus and save resumable checkpoints.
 - [x] **TRN1-02**: User can evaluate Stage 1 on validation metrics and persist results.
 - [x] **TRN2-01**: User can train Stage 2 from Stage 1 checkpoint with lower learning rate and domain-focused data.
-- [ ] **TRN2-02**: User can report Stage 2 improvement against Stage 1 baseline and detect forgetting on Stage 1 validation samples.
+- [x] **TRN2-02**: User can report Stage 2 improvement against Stage 1 baseline and detect forgetting on Stage 1 validation samples.
 - [ ] **TRN3-01**: User can train Stage 3 from Stage 2 checkpoint with genre-conditioned inputs and early stopping.
 - [ ] **TRN3-02**: User can select and export best Stage 3 checkpoint based on validation BLEU.
 
@@ -77,7 +77,7 @@
 | TRN1-01 | Phase 4 | Complete |
 | TRN1-02 | Phase 4 | Complete |
 | TRN2-01 | Phase 5 | Complete |
-| TRN2-02 | Phase 5 | Pending |
+| TRN2-02 | Phase 5 | Complete |
 | TRN3-01 | Phase 6 | Pending |
 | TRN3-02 | Phase 6 | Pending |
 | EVAL-01 | Phase 7 | Pending |
@@ -96,4 +96,4 @@
 
 ---
 *Requirements defined: 2026-03-22*
-*Last updated: 2026-03-22 after Phase 05 Plan 01 completion*
+*Last updated: 2026-03-22 after Phase 05 Plan 02 completion*
