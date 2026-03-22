@@ -87,6 +87,12 @@ Plans:
 
 **Requirements:** TRN1-01, TRN1-02
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Stage 1 training CLI with checkpoints and run manifests (TRN1-01)
+- [ ] 04-02-PLAN.md — Stage 1 evaluation CLI with BLEU/chrF metrics artifacts (TRN1-02)
+
 **Success criteria:**
 1. Stage 1 training run completes and saves resumable checkpoints.
 2. Validation metrics are computed and written to structured artifacts.
