@@ -106,6 +106,12 @@ Plans:
 
 **Requirements:** TRN2-01, TRN2-02
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Stage 2 training CLI with shared utilities and forgetting detection
+- [ ] 05-02-PLAN.md — Stage 2 evaluation CLI with comparison reporting
+
 **Success criteria:**
 1. Stage 2 starts from Stage 1 checkpoint and trains with lower LR profile.
 2. Stage 2 validation quality improves over Stage 1 on domain-focused evaluation.
