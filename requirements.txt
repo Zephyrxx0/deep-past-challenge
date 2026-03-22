@@ -16,3 +16,4 @@ sacremoses
 unicodedata2
 peft
 numpy
+PyYAML
