@@ -106,11 +106,12 @@ Plans:
 
 **Requirements:** TRN2-01, TRN2-02
 
-**Plans:** 2 plans
+**Plans:** 1/3 plans complete
 
 Plans:
-- [ ] 05-01-PLAN.md — Stage 2 training CLI with shared utilities and forgetting detection
-- [ ] 05-02-PLAN.md — Stage 2 evaluation CLI with comparison reporting
+- [x] 05-01-PLAN.md — Stage 2 training CLI with shared utilities (TRN2-01)
+- [ ] 05-02-PLAN.md — Forgetting detection baseline and comparison
+- [ ] 05-03-PLAN.md — Stage 2 evaluation CLI with comparison reporting (TRN2-02)
 
 **Success criteria:**
 1. Stage 2 starts from Stage 1 checkpoint and trains with lower LR profile.
@@ -179,4 +180,4 @@ Plans:
 - Coverage status: PASS
 
 ---
-*Last updated: 2026-03-22 after Phase 04 Plan 01 completion*
+*Last updated: 2026-03-22 after Phase 05 Plan 01 completion*

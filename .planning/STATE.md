@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to plan
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-22T19:57:11.743Z"
+status: Executing Phase 05
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-03-22T20:10:53Z"
 progress:
   total_phases: 9
   completed_phases: 4
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 12
+  completed_plans: 11
 ---
 
 # STATE
@@ -19,16 +19,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-22)
 
 **Core value:** Deliver reliable Akkadian-to-English translation quality through a reproducible 3-stage training pipeline that avoids leakage and preserves domain adaptation gains.
-**Current focus:** Phase 04 — stage-1-training (complete)
+**Current focus:** Phase 05 — stage-2-domain-adaptation
 
 ## Current Status
 
 - Initialization complete: yes
 - Roadmap complete: yes
-- Active phase: 4 (complete)
-- Current plan: 2 of 2
-- Last completed plan: 04-02-PLAN.md (Stage 1 evaluation CLI with BLEU/chrF)
-- Next command: Transition to Phase 05
+- Active phase: 5
+- Current plan: 1 of 3
+- Last completed plan: 05-01-PLAN.md (Stage 2 training infrastructure)
+- Next command: Execute 05-02-PLAN.md
 
 ## Artifacts
 
@@ -46,9 +46,9 @@ See: .planning/PROJECT.md (updated 2026-03-22)
 
 ## Session Continuity
 
-Last session: 2026-03-22T19:57:11.739Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-stage-2-domain-adaptation/05-CONTEXT.md
+Last session: 2026-03-22T20:10:53Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: .planning/phases/05-stage-2-domain-adaptation/05-01-SUMMARY.md
 
 ## Decisions Made This Session
 
@@ -57,6 +57,9 @@ Resume file: .planning/phases/05-stage-2-domain-adaptation/05-CONTEXT.md
 - Metrics logged to JSONL format for easy incremental parsing
 - Evaluation dry-run writes zero metrics without torch imports for fast CI validation
 - Metrics JSON includes checkpoint path and timestamp for traceability
+- Extract 5 shared functions from train_stage1.py to training_utils.py for reuse across stages
+- write_run_manifest extended with stage and checkpoint_path params for Stage 2/3
+- Checkpoint validation checks model.safetensors or pytorch_model.bin presence
 
 ## Performance Metrics
 
@@ -64,6 +67,7 @@ Resume file: .planning/phases/05-stage-2-domain-adaptation/05-CONTEXT.md
 |-------|------|----------|-------|-------|
 | 04 | 01 | 3m | 2 | 3 |
 | 04 | 02 | 2m | 2 | 2 |
+| 05 | 01 | 3m | 2 | 3 |
 
 ---
 *Initialized: 2026-03-22*
