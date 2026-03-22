@@ -31,9 +31,9 @@ This roadmap converts v1 requirements into executable phases with explicit succe
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Add config-driven model selector and approved model catalog (ARCH-01)
-- [ ] 01-02-PLAN.md — Add model/tokenizer smoke-test command with generation check (ARCH-02)
-- [ ] 01-03-PLAN.md — Add versioned stage training configs and loader CLI (ARCH-03)
+- [x] 01-01-PLAN.md — Add config-driven model selector and approved model catalog (ARCH-01)
+- [x] 01-02-PLAN.md — Add model/tokenizer smoke-test command with generation check (ARCH-02)
+- [x] 01-03-PLAN.md — Add versioned stage training configs and loader CLI (ARCH-03)
 
 **Success criteria:**
 1. A committed config path supports switching among approved candidate checkpoints.
@@ -154,4 +154,4 @@ Plans:
 - Coverage status: PASS
 
 ---
-*Last updated: 2026-03-22 after roadmap creation*
+*Last updated: 2026-03-22 after Phase 1 completion*
