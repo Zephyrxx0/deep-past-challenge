@@ -1,0 +1,12 @@
+model_prefix: akkadian_sp
+vocab_size: 8000
+character_coverage: 0.9995
+model_type: unigram
+normalization_rule_name: nfkc
+special_tokens:
+  - <gap>
+  - '[LETTER]'
+  - '[DEBT_NOTE]'
+  - '[CONTRACT]'
+  - '[ADMIN]'
+default_output_dir: models/tokenizer
