@@ -22,10 +22,12 @@ Deliver reliable Akkadian-to-English translation quality through a reproducible 
 - ✓ Tokenizer training/resolver interface preserves `<gap>` and genre tags via manifest contract (TOK-01, validated in Phase 2)
 - ✓ Deterministic tokenizer roundtrip verification command for representative transliterations (TOK-02, validated in Phase 2)
 - ✓ Deterministic stage data loading, seq2seq batching, and split integrity checks (DATA-01/02/03, validated in Phase 3)
+- ✓ Stage 1 training CLI with checkpointing, resumability, and run manifests (TRN1-01, validated in Phase 4)
+- ✓ Stage 1 evaluation CLI with BLEU/chrF metrics artifacts (TRN1-02, validated in Phase 4)
 
 ### Active
 
-- [ ] Implement training infrastructure for staged fine-tuning
+- [ ] Implement Stage 2 and Stage 3 training infrastructure
 - [ ] Train and evaluate Stage 1, Stage 2, and Stage 3 models with reproducible metrics
 - [ ] Integrate glossary-aware decoding/post-processing for proper name accuracy
 - [ ] Generate competition-ready test predictions and submission artifacts
@@ -46,8 +48,7 @@ Deliver reliable Akkadian-to-English translation quality through a reproducible 
 - Candidate model families researched: mBART-50, mT5-base, NLLB-200-distilled
 - Research direction selected: architecture-focused research for low-resource historical NMT
 - Training strategy: curriculum fine-tuning with learning-rate decay (1e-4 -> 5e-5 -> 1e-5)
-- Current state: Phase 2 complete — tokenizer training/resolution and roundtrip integrity gates are now implemented and test-covered.
- - Current state: Phase 3 complete — deterministic data loaders, seq2seq collation, and integrity checks are implemented and test-covered.
+- Current state: Phase 4 complete — Stage 1 training CLI with checkpointing/resumability and evaluation CLI with BLEU/chrF metrics are implemented and test-covered.
 
 ## Constraints
 
@@ -84,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-22 after Phase 3 completion*
+*Last updated: 2026-03-23 after Phase 4 completion*
