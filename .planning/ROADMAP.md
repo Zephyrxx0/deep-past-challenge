@@ -48,6 +48,12 @@ Plans:
 
 **Requirements:** TOK-01, TOK-02
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Build config-driven tokenizer training/resolver CLIs with special-token preservation tests (TOK-01)
+- [ ] 02-02-PLAN.md — Add roundtrip verification CLI and representative transliteration roundtrip tests (TOK-02)
+
 **Success criteria:**
 1. Tokenizer recognizes `<gap>` and genre tags consistently.
 2. Roundtrip tests pass on representative transliterations.
@@ -154,4 +160,4 @@ Plans:
 - Coverage status: PASS
 
 ---
-*Last updated: 2026-03-22 after Phase 1 completion*
+*Last updated: 2026-03-22 after Phase 2 planning*
