@@ -158,6 +158,12 @@ Plans:
 
 **Requirements:** INF-01, INF-02
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — Batched inference CLI generating translations from final checkpoint (INF-01)
+- [ ] 08-02-PLAN.md — Submission file validator ensuring competition format compliance (INF-02)
+
 **Success criteria:**
 1. Inference generates one output per test input with no missing rows.
 2. Submission file matches expected schema and passes validation checks.
