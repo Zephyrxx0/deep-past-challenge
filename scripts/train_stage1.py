@@ -29,6 +29,7 @@ from scripts.training_utils import (
     validate_config,
     write_run_manifest,
     set_seeds,
+    configure_mbart_tokenizer,
 )
 
 
@@ -133,6 +134,9 @@ def run_training(config: dict, resume_from: Path | None = None) -> None:
         print(f"[INFO] Loading model: {model_id}")
         tokenizer = AutoTokenizer.from_pretrained(model_id)
         model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
+
+    # Configure mBART tokenizer with language codes
+    tokenizer = configure_mbart_tokenizer(tokenizer)
 
     model.to(device)
 
