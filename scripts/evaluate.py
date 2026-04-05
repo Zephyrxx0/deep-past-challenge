@@ -178,9 +178,12 @@ def generate_predictions(
     import torch
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
+    from scripts.training_utils import configure_mbart_tokenizer
+
     # Load model and tokenizer
     print(f"[INFO] Loading checkpoint: {checkpoint_path}")
     tokenizer = AutoTokenizer.from_pretrained(checkpoint_path)
+    tokenizer = configure_mbart_tokenizer(tokenizer)
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint_path)
     model.to(device)
     model.eval()

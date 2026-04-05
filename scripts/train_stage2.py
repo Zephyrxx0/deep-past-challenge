@@ -32,6 +32,7 @@ from scripts.training_utils import (
     validate_config,
     write_run_manifest,
     set_seeds,
+    configure_mbart_tokenizer,
 )
 
 
@@ -241,6 +242,9 @@ def run_training(
         print(f"[INFO] Loading Stage 1 checkpoint: {checkpoint_path}")
         tokenizer = AutoTokenizer.from_pretrained(checkpoint_path)
         model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint_path)
+
+    # Configure mBART tokenizer with language codes
+    tokenizer = configure_mbart_tokenizer(tokenizer)
 
     model.to(device)
 

@@ -28,6 +28,12 @@ DEFAULT_BATCH_SIZE = 4
 DEFAULT_MAX_SOURCE_LENGTH = 256
 DEFAULT_MAX_TARGET_LENGTH = 256
 
+# mBART language codes
+# For Akkadian->English, we use a close proxy: Arabic (ar_AR) for Akkadian (Semitic family)
+# and English (en_XX) for target. This provides reasonable subword tokenization.
+DEFAULT_SRC_LANG = "ar_AR"  # Closest available proxy for Akkadian
+DEFAULT_TGT_LANG = "en_XX"  # English
+
 
 class TranslationDataset(Dataset):
     def __init__(
@@ -56,30 +62,25 @@ def collate_fn(batch, tokenizer, max_source_length: int, max_target_length: int)
     sources = [item["source"] for item in batch]
     targets = [item["target"] for item in batch]
 
-    inputs = tokenizer(
+    # Tokenize sources and targets together using text_target parameter
+    # This is the modern approach (replaces deprecated as_target_tokenizer)
+    model_inputs = tokenizer(
         sources,
+        text_target=targets,
         max_length=max_source_length,
         padding="max_length",
         truncation=True,
         return_tensors="pt",
     )
 
-    with tokenizer.as_target_tokenizer():
-        labels = tokenizer(
-            targets,
-            max_length=max_target_length,
-            padding="max_length",
-            truncation=True,
-            return_tensors="pt",
-        )
-
-    labels_tensor = labels["input_ids"]
-    labels_tensor[labels_tensor == tokenizer.pad_token_id] = -100
+    # Replace padding token id with -100 for labels (ignored in loss calculation)
+    labels = model_inputs["labels"]
+    labels[labels == tokenizer.pad_token_id] = -100
 
     return {
-        "input_ids": inputs["input_ids"],
-        "attention_mask": inputs["attention_mask"],
-        "labels": labels_tensor,
+        "input_ids": model_inputs["input_ids"],
+        "attention_mask": model_inputs["attention_mask"],
+        "labels": labels,
     }
 
 
@@ -91,6 +92,8 @@ def create_dataloader(
     max_source_length: int = DEFAULT_MAX_SOURCE_LENGTH,
     max_target_length: int = DEFAULT_MAX_TARGET_LENGTH,
     seed: int = SEED,
+    src_lang: str = DEFAULT_SRC_LANG,
+    tgt_lang: str = DEFAULT_TGT_LANG,
 ) -> DataLoader:
     if torch is None:
         raise ModuleNotFoundError("torch is required to create DataLoader")
@@ -99,6 +102,14 @@ def create_dataloader(
 
     df = load_stage_data(stage, split, seed)
     tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+    # Set source and target languages for mBART models
+    # This is required to properly configure the tokenizer for translation tasks
+    if hasattr(tokenizer, "src_lang"):
+        tokenizer.src_lang = src_lang
+    if hasattr(tokenizer, "tgt_lang"):
+        tokenizer.tgt_lang = tgt_lang
+
     dataset = TranslationDataset(
         df,
         tokenizer,

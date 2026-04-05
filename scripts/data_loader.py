@@ -79,6 +79,13 @@ def load_stage_data(stage: int, split: str = "train", seed: int = SEED) -> pd.Da
             f"Dataset missing required columns. Expected either (transliteration, translation) or (first_word_spelling, translation)"
         )
 
+    # Drop rows with null values in required columns (prevents tokenizer errors)
+    initial_count = len(df)
+    df = df.dropna(subset=["transliteration_normalized", "translation_normalized"])
+    dropped_count = initial_count - len(df)
+    if dropped_count > 0:
+        print(f"[INFO] Dropped {dropped_count} rows with null values")
+
     # Reset index to ensure deterministic ordering
     df = df.reset_index(drop=True)
 

@@ -6,6 +6,7 @@ Provides common functionality:
 - Config validation
 - Run manifest writing
 - Seed setting for reproducibility
+- Tokenizer loading with mBART language configuration
 
 Per D-07: Extract shared logic into training_utils.py; both Stage 1 and Stage 2
 CLIs import from this module.
@@ -24,6 +25,11 @@ import yaml
 
 # Default seed for reproducibility (per AGENTS.md)
 DEFAULT_SEED = 42
+
+# mBART language codes for Akkadian->English translation
+# Using Arabic as proxy for Akkadian (both Semitic languages)
+MBART_SRC_LANG = "ar_AR"
+MBART_TGT_LANG = "en_XX"
 
 
 def load_config(config_path: Path) -> dict:
@@ -299,3 +305,23 @@ def validate_genre_tags(dataframe: Any, tokenizer: Any) -> bool:
         return False
 
     return True
+
+
+def configure_mbart_tokenizer(tokenizer: Any) -> Any:
+    """Configure mBART tokenizer with source and target languages.
+
+    This is required for mBART models to properly tokenize translation pairs.
+    Uses Arabic as proxy for Akkadian (both are Semitic languages with similar
+    morphological patterns) and English as the target.
+
+    Args:
+        tokenizer: AutoTokenizer instance
+
+    Returns:
+        Configured tokenizer
+    """
+    if hasattr(tokenizer, "src_lang"):
+        tokenizer.src_lang = MBART_SRC_LANG
+    if hasattr(tokenizer, "tgt_lang"):
+        tokenizer.tgt_lang = MBART_TGT_LANG
+    return tokenizer

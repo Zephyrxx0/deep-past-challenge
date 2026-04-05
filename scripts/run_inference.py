@@ -143,7 +143,7 @@ def run_inference(
     import torch
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-    from scripts.training_utils import set_seeds
+    from scripts.training_utils import set_seeds, configure_mbart_tokenizer
 
     # Set seeds for reproducibility
     set_seeds(seed)
@@ -155,6 +155,7 @@ def run_inference(
     # Load model and tokenizer
     print(f"[INFO] Loading checkpoint: {checkpoint}")
     tokenizer = AutoTokenizer.from_pretrained(checkpoint)
+    tokenizer = configure_mbart_tokenizer(tokenizer)
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
     model.to(device)
     model.eval()
