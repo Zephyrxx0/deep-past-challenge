@@ -1,0 +1,32 @@
+# Requirements for Deep Past Akkadian-English Translation
+# Compatible with Kaggle kernels (Python 3.10, CUDA 11.x)
+
+# PyTorch (Kaggle provides this, but specifying for local dev)
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Transformers and NLP
+transformers==4.40.0
+sentencepiece>=0.1.99
+sacrebleu>=2.3.1
+evaluate>=0.4.0
+datasets>=2.14.0
+sacremoses>=0.0.53
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Utilities
+tqdm>=4.65.0
+PyYAML>=6.0
+
+# Development (optional for Kaggle)
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Additional NLP tools
+unicodedata2>=15.0.0
+peft>=0.5.0

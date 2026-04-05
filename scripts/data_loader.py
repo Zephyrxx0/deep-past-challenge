@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -8,6 +9,80 @@ import pandas as pd
 
 
 SEED = 42
+
+# ============================================================================
+# ENVIRONMENT DETECTION
+# ============================================================================
+
+
+def is_kaggle_environment() -> bool:
+    """Detect if running in Kaggle environment."""
+    return os.path.exists("/kaggle/input") or "KAGGLE_KERNEL_RUN_TYPE" in os.environ
+
+
+def is_colab_environment() -> bool:
+    """Detect if running in Google Colab."""
+    try:
+        import google.colab
+
+        return True
+    except ImportError:
+        return False
+
+
+RUNNING_ON_KAGGLE = is_kaggle_environment()
+RUNNING_ON_COLAB = is_colab_environment()
+
+
+def get_data_dir() -> Path:
+    """Get the data directory based on environment."""
+    if RUNNING_ON_KAGGLE:
+        # Kaggle: Try multiple possible input paths
+        kaggle_input = Path("/kaggle/input")
+        possible_paths = [
+            kaggle_input / "deep-past-akkadian" / "data",
+            kaggle_input / "deep-past" / "data",
+            kaggle_input / "deep-past-challenge" / "data",
+            kaggle_input / "akkadian-translation",
+        ]
+
+        for path in possible_paths:
+            if path.exists():
+                return path
+
+        # Fallback: check if data files exist directly in any dataset
+        for dataset_dir in kaggle_input.iterdir():
+            if dataset_dir.is_dir():
+                if (dataset_dir / "stage1_train.csv").exists():
+                    return dataset_dir
+                if (dataset_dir / "data" / "stage1_train.csv").exists():
+                    return dataset_dir / "data"
+
+        # Default fallback
+        return kaggle_input / "deep-past-akkadian" / "data"
+
+    elif RUNNING_ON_COLAB:
+        # Colab: Assume repo cloned to /content
+        return Path("/content/deep-past-challenge/data")
+
+    else:
+        # Local development
+        return Path("data")
+
+
+DATA_DIR = get_data_dir()
+
+
+def get_stage_configs() -> dict:
+    """Get stage configurations with correct paths for current environment."""
+    return {
+        1: {"train": DATA_DIR / "stage1_train.csv"},
+        2: {"train": DATA_DIR / "stage2_train.csv"},
+        3: {"train": DATA_DIR / "stage3_train.csv", "val": DATA_DIR / "stage3_val.csv"},
+    }
+
+
+# Legacy compatibility - these will be dynamically resolved
 STAGE_CONFIGS = {
     1: {"train": "data/stage1_train.csv"},
     2: {"train": "data/stage2_train.csv"},
@@ -15,13 +90,16 @@ STAGE_CONFIGS = {
 }
 
 
-def load_stage_data(stage: int, split: str = "train", seed: int = SEED) -> pd.DataFrame:
+def load_stage_data(
+    stage: int, split: str = "train", seed: int = SEED, data_dir: Path = None
+) -> pd.DataFrame:
     """Load stage dataset with deterministic ordering.
 
     Args:
         stage: Training stage (1, 2, or 3)
         split: Data split ('train' or 'val')
         seed: Random seed for reproducibility
+        data_dir: Optional override for data directory (useful for Kaggle)
 
     Returns:
         DataFrame with transliteration_normalized and translation_normalized columns
@@ -33,12 +111,26 @@ def load_stage_data(stage: int, split: str = "train", seed: int = SEED) -> pd.Da
     if stage not in [1, 2, 3]:
         raise ValueError(f"Invalid stage {stage}. Must be 1, 2, or 3.")
 
-    if split not in STAGE_CONFIGS[stage]:
+    # Get stage configs with correct paths
+    stage_configs = (
+        get_stage_configs()
+        if data_dir is None
+        else {
+            1: {"train": data_dir / "stage1_train.csv"},
+            2: {"train": data_dir / "stage2_train.csv"},
+            3: {
+                "train": data_dir / "stage3_train.csv",
+                "val": data_dir / "stage3_val.csv",
+            },
+        }
+    )
+
+    if split not in stage_configs[stage]:
         raise ValueError(
-            f'Invalid split "{split}" for stage {stage}. Available: {list(STAGE_CONFIGS[stage].keys())}'
+            f'Invalid split "{split}" for stage {stage}. Available: {list(stage_configs[stage].keys())}'
         )
 
-    csv_path = STAGE_CONFIGS[stage][split]
+    csv_path = stage_configs[stage][split]
     csv_file = Path(csv_path)
 
     if not csv_file.exists():
