@@ -1,0 +1,48 @@
+# End-to-End Training Pipeline Configuration
+# This file orchestrates the complete 3-stage curriculum learning pipeline
+
+# Base output directory for pipeline artifacts
+output_base_dir: outputs/pipeline
+
+# Final model export directory (best checkpoint from Stage 3)
+final_model_dir: models/submission_model
+
+# Stage 1: Pre-training on General Corpus
+stage1:
+  config: config/training/stage1.yaml
+  output_dir: models/stage1_final
+  epochs: 5
+  batch_size: 4
+  description: "Train foundational Akkadian-English model on general corpus"
+
+# Stage 2: Domain Adaptation (OARE)
+stage2:
+  config: config/training/stage2.yaml
+  output_dir: models/stage2_final
+  epochs: 3
+  batch_size: 4
+  description: "Adapt to OARE domain with lower learning rate"
+
+# Stage 3: Competition Fine-Tuning
+stage3:
+  config: config/training/stage3.yaml
+  output_dir: models/stage3_final
+  val_data: data/stage3_val.csv
+  epochs: 10
+  batch_size: 4
+  early_stopping_patience: 3
+  description: "Fine-tune for competition with genre conditioning and early stopping"
+
+# Evaluation settings
+evaluation:
+  compute_genre_metrics: true
+  apply_glossary: true
+  glossary_path: data/glossary.json
+
+# Reproducibility settings
+seed: 42
+deterministic: true
+
+# Resource settings
+device: auto  # auto, cuda, or cpu
+num_workers: 0
