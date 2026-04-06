@@ -1,19 +1,28 @@
+# Core ML dependencies
 torch
 torchvision
 torchaudio
-transformers==4.40.0
+transformers>=4.40.0
 sentencepiece
 sacrebleu
 evaluate
 datasets
+peft
+
+# Data processing
 pandas
 numpy
 scikit-learn
+
+# Utilities
 tqdm
-jupyter
-ipykernel
+PyYAML
 sacremoses
 unicodedata2
-peft
-numpy
-PyYAML
+
+# Notebook support
+jupyter
+ipykernel
+
+# GUI dependencies
+gradio>=4.0.0
