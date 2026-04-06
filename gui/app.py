@@ -397,11 +397,7 @@ def create_app() -> gr.Blocks:
     training_manager = TrainingManager(dataset_manager)
     inference_manager = InferenceManager()
 
-    with gr.Blocks(
-        title="Deep Past - Akkadian Translator",
-        theme=THEME,
-        css=CUSTOM_CSS,
-    ) as app:
+    with gr.Blocks(title="Deep Past - Akkadian Translator") as app:
         # Header
         gr.Markdown(
             """
@@ -446,7 +442,6 @@ def create_app() -> gr.Blocks:
                             stage1_preview = gr.Dataframe(
                                 label="Preview",
                                 visible=False,
-                                max_rows=5,
                             )
 
                         with gr.Accordion("Stage 2: OARE Domain", open=True):
@@ -459,7 +454,6 @@ def create_app() -> gr.Blocks:
                             stage2_preview = gr.Dataframe(
                                 label="Preview",
                                 visible=False,
-                                max_rows=5,
                             )
 
                         with gr.Accordion("Stage 3: Competition Data", open=True):
@@ -847,6 +841,8 @@ def main():
         share=args.share,
         debug=args.debug,
         show_error=True,
+        theme=THEME,
+        css=CUSTOM_CSS,
     )
 
 
